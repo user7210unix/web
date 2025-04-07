@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user7210unix | Minimalist Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Add custom font */
+        @font-face {
+            font-family: 'Orbitron';
+            src: url('orbitron.medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            border: 0;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --h: 120; /* Hue for green */
+            --s: 90%; /* Saturation */
+            --l: 75%; /* Lightness */
+            font-size: calc(16px + (24 - 16) * (100vw - 320px) / (2560 - 320));
+        }
+        body {
+            background:
+                linear-gradient(hsla(0, 0%, 0%, 0) 37.5%, hsla(0, 0%, 0%, 0.5)),
+                url("https://images.unsplash.com/photo-1678757386619-453cf6a1525f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") center / cover;
+            color: white;
+            font-family: 'Orbitron', sans-serif; /* Apply custom font */
+            font-size: 1em/1.5 sans-serif;
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        main {
+            width: 100%;
+            max-width: 1200px;
+        }
+        
+        /* Glass effect for all containers */
+        .glass-container {
+            background: hsla(0, 0%, 100%, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 1em;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, hsla(var(--h), var(--s), var(--l), 0.9), hsla(var(--h), var(--s), var(--l), 0.5));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        /* GitHub Button (Big Glass Style) */
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            background: hsla(0, 0%, 100%, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 0.8em;
+            color: white;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            margin: 1.5rem auto;
+            max-width: 300px;
+        }
+        .github-btn:hover {
+            background: hsla(var(--h), var(--s), var(--l), 0.2);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        .github-btn i {
+            font-size: 1.8rem;
+            color: hsla(var(--h), var(--s), var(--l), 0.9);
+        }
+        
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(15.5em, 1fr));
+            gap: 3rem;
+            padding: 3em 0;
+            width: 100%;
+        }
+        
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .icon {
+            background: hsla(0, 0%, 100%, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 50%;
+            width: 8em;
+            height: 8em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .icon:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+        
+        .icon:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, hsla(var(--h), var(--s), var(--l), 0.15) 0%, transparent 70%);
+            transform: rotate(45deg);
+        }
+        
+        .icon i {
+            font-size: 3rem;
+            color: hsla(var(--h), var(--s), var(--l), 0.9);
+            z-index: 1;
+        }
+        
+        .project-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        .project-description {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+        .project-link {
+            display: inline-block;
+            padding: 0.5em 1em;
+            background: hsla(var(--h), var(--s), var(--l), 0.8);
+            color: black;
+            border-radius: 0.5em;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .project-link:hover {
+            background: hsla(var(--h), var(--s), var(--l), 1);
+            transform: scale(1.1);
+        }
+        footer {
+            opacity: 0.8;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <header class="glass-container">
+            <h1>user7210unix</h1>
+            <p class="subtitle">Minimalist Software Developer</p>
+            
+            <!-- Single GitHub Button (Glass Style) -->
+            <a href="https://github.com/user7210unix" class="github-btn" target="_blank">
+                <i class="fab fa-github"></i>
+                GitHub
+            </a>
+        </header>
+        
+        <div class="glass-container">
+            <div class="projects-container">
+                <div class="project-card">
+                    <div class="icon">
+                        <i class="fas fa-window-maximize"></i>
+                    </div>
+                    <h2 class="project-title">SlimWM</h2>
+                    <p class="project-description">Dynamic window manager for X11.</p>
+                    <a href="https://github.com/user7210unix/SlimWM" class="project-link" target="_blank">View Project</a>
+                </div>
+                <div class="project-card">
+                    <div class="icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h2 class="project-title">EasySurfer</h2>
+                    <p class="project-description">Simple web browsing with minimal distractions.</p>
+                    <a href="https://github.com/user7210unix/EasySurfer" class="project-link" target="_blank">View Project</a>
+                </div>
+                <div class="project-card">
+                    <div class="icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h2 class="project-title">Lxpkg</h2>
+                    <p class="project-description">Package manager for LearnixOS.</p>
+                    <a href="https://github.com/user7210unix/Lxpkg" class="project-link" target="_blank">View Project</a>
+                </div>
+                <div class="project-card">
+                    <div class="icon">
+                        <i class="fas fa-terminal"></i>
+                    </div>
+                    <h2 class="project-title">Full Suckless</h2>
+                    <p class="project-description">Suite of suckless software configured for maximum productivity.</p>
+                    <a href="https://github.com/user7210unix/Full-Suckless" class="project-link" target="_blank">View Project</a>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="glass-container">
+            &copy; 2025 user7210unix
+        </footer>
+    </main>
+</body>
+</html>
+
