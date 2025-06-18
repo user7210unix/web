@@ -1,255 +1,633 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>user7210unix | Homepage</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Add custom font */
-        @font-face {
-            font-family: 'Orbitron';
-            src: url('orbitron.medium.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="user7210unix - Minimalist Systems Programmer and Lead Developer of LearnixOS. Explore open-source projects like SlimWM, EasySurfer, and more.">
+  <meta name="keywords" content="user7210unix, LearnixOS, open-source, systems programming, dotfiles, SlimWM, EasySurfer, Lxpkg, Full Suckless">
+  <meta name="author" content="user7210unix">
+  <title>user7210unix | Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @font-face {
+      font-family: 'Orbitron';
+      src: url('orbitron.medium.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
 
-        * {
-            border: 0;
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        :root {
-            --h: 120; /* Hue for green */
-            --s: 90%; /* Saturation */
-            --l: 75%; /* Lightness */
-            font-size: calc(16px + (24 - 16) * (100vw - 320px) / (2560 - 320));
-        }
-        body {
-            background:
-                linear-gradient(hsla(0, 0%, 0%, 0) 37.5%, hsla(0, 0%, 0%, 0.5)),
-                url("https://images.unsplash.com/photo-1678757386619-453cf6a1525f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") center / cover;
-            color: white;
-            font-family: 'Orbitron', sans-serif; /* Apply custom font */
-            font-size: 1em/1.5 sans-serif;
-            min-height: 100vh;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        main {
-            width: 100%;
-            max-width: 1200px;
-        }
-        
-        /* Glass effect for all containers */
-        .glass-container {
-            background: hsla(0, 0%, 100%, 0.1);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 1em;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .glass-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, hsla(var(--h), var(--s), var(--l), 0.9), hsla(var(--h), var(--s), var(--l), 0.5));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-        }
-        
-        /* GitHub Button (Big Glass Style) */
-        .github-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            padding: 1rem 2rem;
-            background: hsla(0, 0%, 100%, 0.1);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 0.8em;
-            color: white;
-            font-size: 1.2rem;
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            margin: 1.5rem auto;
-            max-width: 300px;
-        }
-        .github-btn:hover {
-            background: hsla(var(--h), var(--s), var(--l), 0.2);
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-        }
-        .github-btn i {
-            font-size: 1.8rem;
-            color: hsla(var(--h), var(--s), var(--l), 0.9);
-        }
-        
-        .projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(15.5em, 1fr));
-            gap: 3rem;
-            padding: 3em 0;
-            width: 100%;
-        }
-        
-        .project-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        
-        .icon {
-            background: hsla(0, 0%, 100%, 0.1);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 50%;
-            width: 8em;
-            height: 8em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-        .icon:hover {
-            transform: scale(1.05) rotate(2deg);
-        }
-        
-        .icon:before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, hsla(var(--h), var(--s), var(--l), 0.15) 0%, transparent 70%);
-            transform: rotate(45deg);
-        }
-        
-        .icon i {
-            font-size: 3rem;
-            color: hsla(var(--h), var(--s), var(--l), 0.9);
-            z-index: 1;
-        }
-        
-        .project-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: white;
-        }
-        .project-description {
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-        }
-        .project-link {
-            display: inline-block;
-            padding: 0.5em 1em;
-            background: hsla(var(--h), var(--s), var(--l), 0.8);
-            color: black;
-            border-radius: 0.5em;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-        .project-link:hover {
-            background: hsla(var(--h), var(--s), var(--l), 1);
-            transform: scale(1.1);
-        }
-        footer {
-            opacity: 0.8;
-            font-size: 0.9rem;
-            text-align: center;
-            margin-top: 2rem;
-        }
-    </style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --primary: #D36213; /* Vibrant orange */
+      --secondary: #521309; /* Deep red-brown */
+      --tertiary: #6A181D; /* Rich burgundy */
+      --glass-bg: rgba(255, 255, 255, 0.06);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --text-color: #e6e6e6;
+      --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--text-color);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      background: linear-gradient(rgba(10, 10, 20, 0.85), rgba(20, 20, 30, 0.85));
+    }
+
+    body.light {
+      color: #1a1a1a;
+      background: linear-gradient(rgba(240, 240, 255, 0.85), rgba(255, 255, 255, 0.85));
+      --glass-bg: rgba(0, 0, 0, 0.06);
+      --glass-border: rgba(0, 0, 0, 0.1);
+      --text-color: #1a1a1a;
+    }
+
+    .video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .overlay-glass {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    /* Theme Toggle */
+    #theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      border: 1px solid var(--glass-border);
+      border-radius: 50%;
+      padding: 12px;
+      cursor: pointer;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    #theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px var(--primary);
+    }
+
+    #theme-toggle i {
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+
+    /* Glass Container */
+    .glass-container {
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      border-radius: 20px;
+      border: 1px solid var(--glass-border);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      max-width: 1200px;
+      width: 100%;
+      margin-bottom: 3rem;
+      position: relative;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .glass-container:hover {
+      transform: translateY(-10px) perspective(1000px) rotateX(2deg) rotateY(2deg);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .glass-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary, 0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .glass-container:hover::before {
+      opacity: 0.3;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .profile-pic {
+   width: 200px;
+   height: 200px;
+   border-radius: 15px;
+   margin-bottom: 1.5rem;
+   transition: transform 0.3s ease;
+}
+
+    .profile-pic:hover {
+      transform: scale(1.05) perspective(1000px) rotateX(3deg);
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      background: linear-gradient(90deg, var(--primary), var(--tertiary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--tertiary);
+      margin-bottom: 1rem;
+    }
+
+    .inline-logo {
+      width: 26px;
+      height: 26px;
+      vertical-align: middle;
+      margin-left: 5px;
+    }
+
+    .github-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 25px;
+      background: var(--primary);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1.1rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+      max-width: 280px;
+      margin: 1rem auto;
+    }
+
+    .github-btn:hover {
+      background: var(--tertiary);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .github-btn svg {
+      width: 24px;
+      height: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .github-btn:hover svg {
+      transform: translateX(5px);
+    }
+
+    /* Sections */
+    section h2 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(90deg, var(--primary), var(--tertiary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    section p, section ul {
+      max-width: 600px;
+      margin: 0 auto 1rem;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    section ul {
+      list-style: none;
+    }
+
+    section ul li {
+      margin: 0.6rem 0;
+      position: relative;
+      padding-left: 1.2rem;
+    }
+
+    section ul li::before {
+      content: '➜';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+
+    section ul li strong {
+      color: var(--primary);
+    }
+
+    /* Projects */
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+      gap: 2rem;
+      padding: 1rem 0;
+    }
+
+    .project-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      border: 1px solid var(--glass-border);
+      transition: all 0.4s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px) perspective(1000px) rotateX(3deg) rotateY(3deg);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .icon {
+      background: var(--secondary);
+      border-radius: 50%;
+      width: 6em;
+      height: 6em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      border: 1px solid var(--glass-border);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .icon i {
+      font-size: 2.2rem;
+      color: var(--primary);
+      z-index: 1;
+      line-height: 1;
+    }
+
+    .icon::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radialدم
+      -gradient(circle, var(--primary, 0.15), transparent 70%);
+      transform: rotate(45deg);
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .icon::before {
+      transform: rotate(50deg) scale(1.1);
+    }
+
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--tertiary);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-description {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-bottom: 1rem;
+    }
+
+    .project-link {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .project-link:hover {
+      background: var(--tertiary);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .skill {
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      padding: 0.5rem 1rem;
+      border-radius: 1.2em;
+      font-weight: 500;
+      border: 1px solid var(--glass-border);
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .skill:hover {
+      background: var(--secondary);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .skill i {
+      margin-right: 0.4rem;
+    }
+
+    /* Contributions */
+    .contributions-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .contribution-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      padding: 1.2rem;
+      border-radius: 15px;
+      border: 1px solid var(--glass-border);
+      max-width: 280px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .contribution-card:hover {
+      transform: translateY(-5px) perspective(1000px) rotateX(2deg);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Contact */
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .contact-links svg {
+      width: 26px;
+      height: 26px;
+      fill: var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    body.light .contact-links svg {
+      fill: var(--tertiary);
+    }
+
+    .contact-links svg:hover {
+      fill: var(--tertiary);
+      transform: scale(1.2);
+    }
+
+    /* Footer */
+    footer p {
+      text-align: center;
+      opacity: 0.8;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--tertiary);
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+      .overlay-glass {
+        padding: 2.5rem;
+      }
+
+      .glass-container {
+        padding: 2.5rem;
+      }
+
+      .profile-pic {
+        max-width: 250px;
+        max-height: 250px;
+      }
+
+      h1 {
+        font-size: 3.5rem;
+      }
+
+      .subtitle {
+        font-size: 1.3rem;
+      }
+
+      .github-btn {
+        padding: 12px 28px;
+        font-size: 1.2rem;
+      }
+
+      .projects-container {
+        grid-template-columns: repeat(auto-fill, minmax(16em, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .profile-pic {
+        width: 150px;
+        height: 150px;
+      }
+
+      section h2 {
+        font-size: 1.6rem;
+      }
+
+      .projects-container {
+        grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
+      }
+
+      .github-btn {
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .profile-pic {
+        width: 120px;
+        height: 120px;
+      }
+
+      section h2 {
+        font-size: 1.4rem;
+      }
+
+      .projects-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-    <main>
-        <header class="glass-container">
-            <h1>user7210unix</h1>
-            <p class="subtitle">Minimalist Software Developer</p>
-            
-            <!-- Single GitHub Button (Glass Style) -->
-            <a href="https://github.com/user7210unix" class="github-btn" target="_blank">
-                <i class="fab fa-github"></i>
-                GitHub
-            </a>
-        </header>
-        
-        <div class="glass-container">
-            <div class="projects-container">
-                <div class="project-card">
-                    <div class="icon">
-                        <i class="fas fa-window-maximize"></i>
-                    </div>
-                    <h2 class="project-title">SlimWM</h2>
-                    <p class="project-description">Dynamic window manager for X11.</p>
-                    <a href="https://github.com/user7210unix/SlimWM" class="project-link" target="_blank">View Project</a>
-                </div>
-                <div class="project-card">
-                    <div class="icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <h2 class="project-title">EasySurfer</h2>
-                    <p class="project-description">Simple web browsing with minimal distractions.</p>
-                    <a href="https://github.com/user7210unix/EasySurfer" class="project-link" target="_blank">View Project</a>
-                </div>
-                <div class="project-card">
-                    <div class="icon">
-                        <i class="fas fa-box-open"></i>
-                    </div>
-                    <h2 class="project-title">Lxpkg</h2>
-                    <p class="project-description">Package manager for LearnixOS.</p>
-                    <a href="https://github.com/user7210unix/Lxpkg" class="project-link" target="_blank">View Project</a>
-                </div>
-                <div class="project-card">
-                    <div class="icon">
-                        <i class="fas fa-terminal"></i>
-                    </div>
-                    <h2 class="project-title">Full Suckless</h2>
-                    <p class="project-description">Suite of suckless software configured for maximum productivity.</p>
-                    <a href="https://github.com/user7210unix/Full-Suckless" class="project-link" target="_blank">View Project</a>
-                </div>
-            </div>
+  <div class="video-container">
+    <video autoplay muted loop>
+      <source src="https://vlasovdevcore.github.io/tz-project-2/video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="overlay-glass">
+        <!-- Header Section -->
+    <header class="glass-container">
+      <img src="https://github.com/user7210unix/user7210unix/raw/main/pfp.png" alt="Profile Picture" class="profile-pic">
+      <h1>user7210unix</h1>
+      <p class="subtitle">Lead Developer of <a href="https://learnixos.github.io/" target="_blank">LearnixOS <img src="https://raw.githubusercontent.com/LearnixOS/learnixos.github.io/main/assets/images/logo.png" alt="LearnixOS Logo" class="inline-logo"></a></p>
+      <p>Minimalist Systems Programmer | Crafting Elegant Code</p>
+      <a href="https://github.com/user7210unix" class="github-btn" target="_blank">
+        <svg width="24" height="24" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5124 1111C7.21094 0.5 0.5 7.03506 0.5 15.1198C0.5 21.5824 4.79993 27.0528 10.7651 28.989C11.5109 29.1346 11.784 28.6744 11.784 28.2874C11.784 27.9485 11.7595 26.7867 11.7595 25.5762C7.58337 26.4478 6.71374 23.8334 6.71374 23.8334C6.04261 22.1391 5.04822 21.7036 5.04822 21.7036C3.68139 20.808 5.14778 20.808 5.14778 20.808C6.66396 20.9048 7.45953 22.3087 7.45953 22.3087C8.80148 24.5354 10.9639 23.9062 11.8338 23.5189C11.958 22.5748 12.3559 21.9213 12.7784 21.5583C9.44771 21.2194 5.94336 19.9608 5.94336 14.3451C5.94336 12.7476 6.5395 11.4406 7.48412 10.4241C7.33508 10.0611 6.81299 8.56011 7.63346 6.55117C7.63346 6.55117 8.90104 6.16382 11.7592 8.05186C12.9828 7.73184 14.2448 7.56904 15.5124 7.56767C16.78 7.56767 18.0721 7.73728 19.2654 8.05186C22.1238 6.16382 23.3914 6.55117 23.3914 6.55117C24.2118 8.56011 23.6894 10.0611 23.5404 10.4241C24.5099 11.4406 25.0815 12.7476 25.0815 14.3451C25.0815 19.9608 21.5771 21.1951 18.2215 21.5583C18.7685 22.0182 19.2405 22.8894 19.2405 24.2692C19.2405 26.2297 19.2159 27.8032 19.2159 28.2871C19.2159 28.6744 19.4894 29.1346 20.2349 28.9893C26.2 27.0526 30.4999 21.5824 30.4999 15.1198C30.5245 7.03506 23.789 0.5 15.5124 0.5Z" fill="currentColor"></path>
+        </svg>
+        Explore GitHub
+      </a>
+    </header>
+
+    <!-- Projects Section -->
+    <section id="projects" class="glass-container">
+      <h2>Projects</h2>
+      <div class="projects-container">
+        <div class="project-card">
+          <div class="icon"><i class="fas fa-window-maximize"></i></div>
+          <h3 class="project-title">SlimWM</h3>
+          <p class="project-description">A lightweight X11 window manager for speed and control. <br><strong>Tech</strong>: C, Xlib</p>
+          <a href="https://github.com/user7210unix/SlimWM" class="project-link" target="_blank">Explore</a>
         </div>
-        
-        <footer class="glass-container">
-            &copy; 2025 user7210unix
-        </footer>
-    </main>
+        <div class="project-card">
+          <div class="icon"><i class="fas fa-globe"></i></div>
+          <h3 class="project-title">EasySurfer</h3>
+          <p class="project-description">A distraction-free browser for focused workflows. <br><strong>Tech</strong>: Python, WebKit</p>
+          <a href="https://github.com/user7210unix/EasySurfer" class="project-link" target="_blank">Explore</a>
+        </div>
+        <div class="project-card">
+          <div class="icon"><i class="fas fa-box-open"></i></div>
+          <h3 class="project-title">Lxpkg</h3>
+          <p class="project-description">Efficient package manager for LearnixOS. <br><strong>Tech</strong>: C, Bash</p>
+          <a href="https://github.com/user7210unix/Lxpkg" class="project-link" target="_blank">Explore</a>
+        </div>
+        <div class="project-card">
+          <div class="icon"><i class="fas fa-terminal"></i></div>
+          <h3 class="project-title">Full Suckless</h3>
+          <p class="project-description">Optimized suckless tools for productivity. <br><strong>Tech</strong>: C, X11</p>
+          <a href="https://github.com/user7210unix/Full-Suckless" class="project-link" target="_blank">Explore</a>
+        </div>
+        <div class="project-card">
+          <div class="icon"><i class="fas fa-laptop-code"></i></div>
+          <h3 class="project-title">LearnixOS</h3>
+          <p class="project-description">An OS for learning and experimentation. <br><strong>Tech</strong>: C, Assembly</p>
+          <a href="https://learnixos.github.io/" class="project-link" target="_blank">Explore</a>
+        </div>
+        <div class="project-card">
+          <div class="icon"><i class="fas fa-cog"></i></div>
+          <h3 class="project-title">Dotfiles</h3>
+          <p class="project-description">Curated configs for Vim, Zsh, Tmux. <br><strong>Tech</strong>: Bash, Vimscript</p>
+          <a href="https://github.com/user7210unix/dotfiles" class="project-link" target="_blank">Explore</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contributions Section -->
+    <section id="contributions" class="glass-container">
+      <h2>Contributions</h2>
+      <p>Building open-source tools to empower developers worldwide.</p>
+      <div class="contributions-grid">
+        <div class="contribution-card">
+          <h3>LearnixOS</h3>
+          <p>Leading a community-driven OS for education.</p>
+        </div>
+        <div class="contribution-card">
+          <h3>Suckless</h3>
+          <p>Enhancing minimalist tools with patches.</p>
+        </div>
+        <div class="contribution-card">
+          <h3>Dotfiles</h3>
+          <p>Inspiring workflows with shared configs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="glass-container">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="skill"><i class="fab fa-cuttlefish"></i> C</div>
+        <div class="skill"><i class="fab fa-python"></i> Python</div>
+        <div class="skill"><i class="fas fa-terminal"></i> Bash</div>
+        <div class="skill"><i class="fab fa-linux"></i> Linux</div>
+        <div class="skill"><i class="fab fa-vim"></i> Vim</div>
+        <div class="skill"><i class="fab fa-git-alt"></i> Git</div>
+        <div class="skill"><i class="fas fa-microchip"></i> Assembly</div>
+      </div>
+    </section>
+
+  <script>
+    // Theme Toggle
+    const toggleButton = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    toggleButton.addEventListener('click', () => {
+      body.classList.toggle('light');
+      const isLight = body.classList.contains('light');
+      toggleButton.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+
+    // Load theme from localStorage
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        body.classList.add('light');
+        toggleButton.innerHTML = '<i class="fas fa-sun"></i>';
+      }
+    });
+  </script>
 </body>
 </html>
-
